@@ -1,13 +1,44 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yönlendiriliyor...</title>
-  <script>
-    window.location.href = "https://texper.com.tr";
-  </script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yükleniyor...</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden; /* Kaydırmayı engelle */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #000; /* Video oynarken arka plan siyah olabilir */
+        }
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Videoyu ekranı kaplayacak şekilde ayarla */
+        }
+    </style>
 </head>
 <body>
+    <video autoplay muted>
+        <source src="video.mp4" type="video/mp4">
+        Tarayıcınız video etiketini desteklemiyor.
+    </video>
+
+    <script>
+        const video = document.querySelector('video');
+
+        setTimeout(function() {
+            window.location.href = "https://texper.com.tr";
+        }, 2000); // 2000 milisaniye = 2 saniye
+
+        // Video bittiğinde de yönlendirme (isteğe bağlı, süre yeterliyse gerekmeyebilir)
+        video.addEventListener('ended', function() {
+            window.location.href = "https://texper.com.tr";
+        });
+    </script>
 </body>
 </html>
