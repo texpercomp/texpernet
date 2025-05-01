@@ -1,51 +1,76 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yükleniyor...</title>
+    <title>Yönlendiriliyorsunuz...</title>
     <style>
+        /* Genel Stil Ayarları */
         body {
-            margin: 0;
-            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            height: 100vh;
+            margin: 0;
             background-color: #000;
-        }
-        video {
-            width: 100%;
-            height: auto; /* Yüksekliği otomatik ayarla */
-            object-fit: contain; /* Videonun en boy oranını koruyarak sığdır */
+            /* Arka plan siyah */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            /* Kaydırmayı engelle */
         }
 
-        /* Mobil cihazlar için (genişliği 768 pikselden küçük olan ekranlar) */
-        @media (max-width: 768px) {
-            video {
-                height: 100%;
-                width: auto; /* Genişliği otomatik ayarla */
-                object-fit: cover; /* Videoyu ekranı kaplayacak şekilde keserek sığdır */
+        .container {
+            position: relative;
+            /* Konumlandırma için */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Logo Stilleri */
+        .logo {
+            width: 450px;
+            /* Logo daha da büyütüldü */
+            height: auto;
+            opacity: 0;
+            animation: logoAnimation 1.2s ease-in-out forwards;
+            /* Bekleme süresi 1.2 saniye */
+        }
+
+        @keyframes logoAnimation {
+            0% {
+                opacity: 0;
+                transform: scale(0.5) translateY(50px);
+                /* Aşağıdan başla */
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.1) translateY(-20px);
+                /* Yukarı zıpla */
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+                /* Orijinal pozisyona dön */
             }
         }
     </style>
 </head>
+
 <body>
-    <video autoplay muted>
-        <source src="video.mp4" type="video/mp4">
-        Tarayıcınız video etiketini desteklemiyor.
-    </video>
+    <div class="container">
+        <img src="images/logo.png" alt="Texper Bilişim" class="logo">
+        </div>
 
     <script>
-        setTimeout(function() {
-            window.location.href = "https://texper.com.tr";
-        }, 2000);
-
-        const video = document.querySelector('video');
-        video.addEventListener('ended', function() {
-            window.location.href = "https://texper.com.tr";
-        });
+        // Yönlendirme kodu
+        setTimeout(function () {
+            window.location.href = "https://www.texper.com.tr/";
+        }, 1200); // 1.2 saniye sonra yönlendir
     </script>
 </body>
+
 </html>
