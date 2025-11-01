@@ -1,76 +1,107 @@
 <!DOCTYPE html>
 <html lang="tr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yönlendiriliyorsunuz...</title>
+    <title>Yönlendiriliyor - Texper Bilişim</title>
+    
+    <script>
+        // 1000 milisaniye (1 saniye) sonra yönlendirme yap
+        setTimeout(function() {
+            window.location.href = "https://texper.com.tr";
+        }, 1000);
+    </script>
+
     <style>
-        /* Genel Stil Ayarları */
         body {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #000;
-            /* Arka plan siyah */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden;
-            /* Kaydırmayı engelle */
-        }
-
-        .container {
-            position: relative;
-            /* Konumlandırma için */
-            display: flex;
+            font-family: 'Open Sans', Arial, sans-serif;
+            background-color: #ffffff; 
             flex-direction: column;
-            align-items: center;
+        }
+        
+        .rainbow-spinner {
+            display: inline-block;
+            width: 5rem;
+            height: 5rem;
+            
+            /* Kalınlık ayarı */
+            border: 0.6em solid #f3f3f3; /* Açık renkli arka çerçeve */
+            
+            /* Gökkuşağı efekti (dönen kısım) */
+            border-top: 0.6em solid transparent;
+            border-left: 0.6em solid transparent;
+            
+            /* Dönen halkanın rengini gradient ile simüle ediyoruz */
+            border-right: 0.6em solid;
+            border-bottom: 0.6em solid;
+
+            /* Kalın ve yuvarlak olsun diye 50% radius */
+            border-radius: 50%;
+            
+            /* Gökkuşağı rengini arkaplana vererek simüle ediyoruz */
+            background: linear-gradient(to right, #007bff, #ffc107, #dc3545); 
+            -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 0.6em), #fff 0);
+            mask: radial-gradient(farthest-side, transparent calc(100% - 0.6em), #fff 0);
+            
+            /* Animasyon */
+            animation: spin 1s linear infinite;
+        }
+        
+        /* Alternatif, daha basit ve tarayıcı uyumlu CSS kodu: */
+        .simple-rainbow-spinner {
+            width: 5rem;
+            height: 5rem;
+            border: 0.6em solid #f3f3f3;
+            border-top: 0.6em solid #dc3545; /* Kırmızı */
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        .rainbow-spinner-container {
+            width: 5rem;
+            height: 5rem;
+            position: relative;
         }
 
-        /* Logo Stilleri */
-        .logo {
-            width: 450px;
-            /* Logo daha da büyütüldü */
-            height: auto;
-            opacity: 0;
-            animation: logoAnimation 1.2s ease-in-out forwards;
-            /* Bekleme süresi 1.2 saniye */
+        .rainbow-spinner-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 0.6em solid #f3f3f3;
+            border-radius: 50%;
         }
 
-        @keyframes logoAnimation {
-            0% {
-                opacity: 0;
-                transform: scale(0.5) translateY(50px);
-                /* Aşağıdan başla */
-            }
+        .rainbow-spinner-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 0.6em solid transparent;
+            border-top-color: #007bff; /* Mavi */
+            border-right-color: #ffc107; /* Sarı */
+            border-bottom-color: #dc3545; /* Kırmızı */
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
 
-            50% {
-                opacity: 1;
-                transform: scale(1.1) translateY(-20px);
-                /* Yukarı zıpla */
-            }
-
-            100% {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-                /* Orijinal pozisyona dön */
-            }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
     </style>
 </head>
-
 <body>
-    <div class="container">
-        <img src="images/logo.png" alt="Texper Bilişim" class="logo">
-        </div>
-
-    <script>
-        // Yönlendirme kodu
-        setTimeout(function () {
-            window.location.href = "https://www.texper.com.tr/";
-        }, 1200); // 1.2 saniye sonra yönlendir
-    </script>
+    <div class="rainbow-spinner-container" role="status">
+    </div>
 </body>
-
 </html>
