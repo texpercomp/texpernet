@@ -3,105 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yönlendiriliyor - Texper Bilişim</title>
+    <title>Texper Bilişim</title>
+    <meta http-equiv="refresh" content="1.5;url=https://texper.com.tr">
     
-    <script>
-        // 1000 milisaniye (1 saniye) sonra yönlendirme yap
-        setTimeout(function() {
-            window.location.href = "https://texper.com.tr";
-        }, 1000);
-    </script>
-
     <style>
-        body {
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: 'Open Sans', Arial, sans-serif;
-            background-color: #ffffff; 
-            flex-direction: column;
+            background-color: #00175a;
+            overflow: hidden;
         }
-        
-        .rainbow-spinner {
-            display: inline-block;
-            width: 5rem;
-            height: 5rem;
-            
-            /* Kalınlık ayarı */
-            border: 0.6em solid #f3f3f3; /* Açık renkli arka çerçeve */
-            
-            /* Gökkuşağı efekti (dönen kısım) */
-            border-top: 0.6em solid transparent;
-            border-left: 0.6em solid transparent;
-            
-            /* Dönen halkanın rengini gradient ile simüle ediyoruz */
-            border-right: 0.6em solid;
-            border-bottom: 0.6em solid;
 
-            /* Kalın ve yuvarlak olsun diye 50% radius */
-            border-radius: 50%;
-            
-            /* Gökkuşağı rengini arkaplana vererek simüle ediyoruz */
-            background: linear-gradient(to right, #007bff, #ffc107, #dc3545); 
-            -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 0.6em), #fff 0);
-            mask: radial-gradient(farthest-side, transparent calc(100% - 0.6em), #fff 0);
-            
-            /* Animasyon */
-            animation: spin 1s linear infinite;
+        .world-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('world-dotted-map.png') no-repeat center center;
+            background-size: contain;
+            opacity: 0.35;
+            z-index: 1;
         }
-        
-        /* Alternatif, daha basit ve tarayıcı uyumlu CSS kodu: */
-        .simple-rainbow-spinner {
-            width: 5rem;
-            height: 5rem;
-            border: 0.6em solid #f3f3f3;
-            border-top: 0.6em solid #dc3545; /* Kırmızı */
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        
-        .rainbow-spinner-container {
-            width: 5rem;
-            height: 5rem;
+
+        .loader-container {
             position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .rainbow-spinner-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border: 0.6em solid #f3f3f3;
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255, 255, 255, 0.1);
+            border-left-color: #ffc107;
             border-radius: 50%;
+            animation: spin 0.7s linear infinite; /* Dönüşü de bir tık hızlandırdım ki akıcı dursun */
         }
-
-        .rainbow-spinner-container::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border: 0.6em solid transparent;
-            border-top-color: #007bff; /* Mavi */
-            border-right-color: #ffc107; /* Sarı */
-            border-bottom-color: #dc3545; /* Kırmızı */
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        
 
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+
+        .center-glow {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(255, 193, 7, 0.08) 0%, rgba(0, 23, 90, 0) 70%);
+            z-index: 1;
+        }
     </style>
 </head>
 <body>
-    <div class="rainbow-spinner-container" role="status">
+
+    <div class="world-bg"></div>
+    <div class="center-glow"></div>
+    
+    <div class="loader-container">
+        <div class="spinner"></div>
     </div>
+
+    <script>
+        // 1.5 saniye (1500 milisaniye)
+        setTimeout(function() {
+            window.location.href = "https://texper.com.tr";
+        }, 1500);
+    </script>
 </body>
 </html>
