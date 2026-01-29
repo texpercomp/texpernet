@@ -3,10 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>TexCloud Gateway | Texper Bilişim</title>
+  <title>Texper Gateway</title>
   
   <link rel="icon" href="assets/img/favicon.png" type="image/png">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
 
   <style>
     :root { --primary: #ffc107; --bg: #000000; }
@@ -14,97 +13,77 @@
     body, html {
       margin: 0; padding: 0; width: 100%; height: 100%;
       background-color: var(--bg);
-      font-family: 'Poppins', sans-serif;
       display: flex; flex-direction: column;
       justify-content: center; align-items: center;
-      color: #fff; overflow: hidden;
+      overflow: hidden;
     }
 
-    /* MASTER BACKGROUND GRID */
+    /* MASTER WORLD MAP BACKGROUND */
     body::before {
       content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background-image: radial-gradient(rgba(255, 193, 7, 0.05) 1px, transparent 1px);
-      background-size: 30px 30px; z-index: 1;
+      background: url('assets/img/world-dotted-map.png') no-repeat center center;
+      background-size: cover;
+      opacity: 0.35; /* Arka plan derinliği için ideal opaklık */
+      z-index: 1;
     }
 
-    .bridge-container {
-      text-align: center; z-index: 2; position: relative;
+    /* ÜZERİNE TEKNOLOJİK DOKU */
+    body::after {
+      content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background-image: radial-gradient(rgba(255, 193, 7, 0.05) 1px, transparent 1px);
+      background-size: 35px 35px; z-index: 2;
+    }
+
+    .container {
+      text-align: center; z-index: 10; position: relative;
     }
 
     .logo {
-      max-width: 200px; margin-bottom: 30px;
-      filter: drop-shadow(0 0 15px rgba(255,193,7,0.2));
+      max-width: 240px; margin-bottom: 60px;
+      filter: drop-shadow(0 0 30px rgba(255,193,7,0.2));
+      animation: logoFade 2.5s ease-in-out forwards;
     }
 
-    /* LOADING BAR */
+    /* LOADER BAR - ENDÜSTRİYEL İNCE ÇİZGİ */
     .loader-wrapper {
-      width: 280px; height: 2px;
+      width: 180px; height: 2px;
       background: rgba(255, 255, 255, 0.05);
-      margin: 20px auto; position: relative; overflow: hidden;
+      margin: 0 auto; position: relative; overflow: hidden;
+      border-radius: 4px;
     }
     .loader-bar {
       position: absolute; width: 0%; height: 100%;
       background: var(--primary);
-      box-shadow: 0 0 15px var(--primary);
-      animation: loadProgress 2.5s ease-in-out forwards;
-    }
-
-    .status-text {
-      font-family: 'Roboto Mono', monospace;
-      font-size: 10px; color: var(--primary);
-      letter-spacing: 2px; text-transform: uppercase;
-      margin-top: 15px; height: 20px;
+      box-shadow: 0 0 20px var(--primary);
+      animation: loadProgress 2.5s cubic-bezier(0.7, 0, 0.3, 1) forwards;
     }
 
     @keyframes loadProgress {
       0% { width: 0%; }
-      30% { width: 45%; }
-      70% { width: 85%; }
       100% { width: 100%; }
     }
 
-    /* REDIRECT HINT */
-    .hint {
-      position: absolute; bottom: -50px; left: 0; width: 100%;
-      font-size: 0.7rem; color: rgba(255,255,255,0.3);
-      font-family: 'Roboto Mono', monospace;
+    @keyframes logoFade {
+      0% { opacity: 0.6; transform: scale(0.98); }
+      100% { opacity: 1; transform: scale(1); }
     }
   </style>
 </head>
 <body>
 
-  <div class="bridge-container">
+  <div class="container">
     <img src="assets/img/1.png" alt="Texper" class="logo">
     
     <div class="loader-wrapper">
       <div class="loader-bar"></div>
     </div>
-
-    <div class="status-text" id="status">INITIALIZING_SECURE_BRIDGE...</div>
-    
-    <div class="hint">REDIRECTING TO TEXPER.COM.TR</div>
   </div>
 
   <script>
-    const statusText = document.getElementById('status');
-    const steps = [
-      "ESTABLISHING_ENCRYPTED_LINK...",
-      "VERIFYING_SSL_HANDSHAKE...",
-      "HANDOVER_TO_MASTER_UNIT...",
-      "REDIRECTING_NOW..."
-    ];
-
-    let currentStep = 0;
-    const interval = setInterval(() => {
-      if (currentStep < steps.length) {
-        statusText.innerText = steps[currentStep];
-        currentStep++;
-      } else {
-        clearInterval(interval);
-        // Yönlendirme hedefi:
-        window.location.href = "https://texper.com.tr";
-      }
-    }, 600); // Toplamda yaklaşık 2.5 saniye sürecek
+    // 2.5 saniye sonra otomatik yönlendirme
+    setTimeout(() => {
+      window.location.href = "https://texper.com.tr";
+    }, 2500);
   </script>
 </body>
 </html>
